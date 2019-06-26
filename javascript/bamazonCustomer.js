@@ -46,6 +46,7 @@ function runSearch() {
     });
 }
 const viewProducts = function() {
+    connection.query("")
 
 };
 const viewLowInv = function() {
@@ -54,19 +55,41 @@ const viewLowInv = function() {
 const addToInv = function() {
 
 };
-const addNewProd = function(product_name, department_name, price, stock_quantity) {
+const addNewProd = function() {
     console.log("\n\tInserting a new product...\n");
-    connection.query(
-        "INSERT INTO products SET ?", {
-            product_name,
-            department_name,
-            price,
-            stock_quantity
-        },
-        function(err, res) {
-            if (err) throw err;
-            console.log(res.affectedRows + "\n\tProduct inserted!\n");
-        })
+    inquirer.prompt([{
+        type: "input",
+        message: "enter the name of the new product.",
+        name: "newItemName"
+    }, {
+        type: "input",
+        message: "Enter department name for new item.",
+        name: "newDeptName"
+    }, {
+        type: "input",
+        message: "Enter price of new item",
+        name: "newItemPrice"
+    }, {
+        type: "input",
+        message: "How many new items will be stocked?",
+        name: "newStockVal"
+    }]).then(function(response) {
+        console.log(response);
+        connection.query(
+            "INSERT INTO products SET ?", {
+                product_name: response.newItemName,
+                department_name: response.newDeptName,
+                price: response.newItemPrice,
+                stock_quantity: response.newStockVal
+            },
+            function(err, res) {
+                if (err) throw err;
+                console.log(res.affectedRows + "\n\tProduct inserted!\n");
+                connection.end();
+            })
+    })
+
+
 };
 
 

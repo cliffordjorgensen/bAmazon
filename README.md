@@ -31,3 +31,4 @@ If a manager selects **Add New Product**, it should allow the manager to add a c
 
 
 # Screen Shots
+![image](https://user-images.githubusercontent.com/49127555/60319470-55954480-992b-11e9-9aed-865788a5793c.png)

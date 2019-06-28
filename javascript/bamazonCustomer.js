@@ -15,6 +15,7 @@ connection.connect(function(err) {
 });
 
 function runSearch() {
+    console.log("\n\t****************| Manager Interface| ****************")
     inquirer.prompt([{
         type: 'list',
         message: '\n\tPlease pick a menu open: \n\n',
@@ -23,7 +24,7 @@ function runSearch() {
             "\t* View Low Inventory",
             "\t* Add to Inventory",
             "\t* Add New Product",
-            "\t* Exit"
+            "\t* Exit\n"
         ],
         name: "action"
     }]).then(function(answer) {
@@ -41,7 +42,7 @@ function runSearch() {
                 addNewProd();
                 break;
             case "Exit":
-                connection.end();
+                process.exit(0);
                 break;
         };
     });
@@ -76,6 +77,7 @@ const addNewProd = function() {
             function(err, res) {
                 if (err) throw err;
                 console.log(res.affectedRows + "\n\tProduct inserted!\n");
+                viewProducts();
                 runSearch();
             })
     })
@@ -107,12 +109,14 @@ const addToInv = function() {
         name: "deptToAdd"
     }, {
         type: "input",
-        message: "What is the new stocked quantity of this item?",
+        message: "How many would you like to add to the current stock?",
         name: "moreAdded"
     }]).then(function(response) {
         connection.query("SELECT * FROM products WHERE ?", { product_name: response.deptToAdd }, function(err, res) {
             if (err) throw err;
+            console.log(res)
             var currentStock = res[0].stock_quantity;
+            console.log(currentStock)
             connection.query("UPDATE products SET ? WHERE ?", [{ stock_quantity: parseInt(response.moreAdded) + parseInt(currentStock) },
                 { product_name: response.deptToAdd }
             ], function(err, results) {

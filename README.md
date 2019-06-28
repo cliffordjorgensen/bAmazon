@@ -34,3 +34,4 @@ If a manager selects **Add New Product**, it should allow the manager to add a c
 ![image](https://user-images.githubusercontent.com/49127555/60319470-55954480-992b-11e9-9aed-865788a5793c.png)
 ![image](https://user-images.githubusercontent.com/49127555/60319539-91300e80-992b-11e9-9090-4afa2839d81c.png)
 ![image](https://user-images.githubusercontent.com/49127555/60319614-d5bbaa00-992b-11e9-9519-e87c1f576ced.png)
+![image](https://user-images.githubusercontent.com/49127555/60319715-364ae700-992c-11e9-9ec0-8894b601aa9d.png)

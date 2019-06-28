@@ -1,5 +1,6 @@
 var inquirer = require('inquirer');
 var mysql = require("mysql");
+const cTable = require('console.table')
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -11,7 +12,7 @@ connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId + "\n");
     runSearch();
-})
+});
 
 function runSearch() {
     inquirer.prompt([{
@@ -42,18 +43,8 @@ function runSearch() {
             case "Exit":
                 connection.end();
                 break;
-        }
+        };
     });
-}
-const viewProducts = function() {
-    connection.query("")
-
-};
-const viewLowInv = function() {
-
-};
-const addToInv = function() {
-
 };
 const addNewProd = function() {
     console.log("\n\tInserting a new product...\n");
@@ -85,10 +76,34 @@ const addNewProd = function() {
             function(err, res) {
                 if (err) throw err;
                 console.log(res.affectedRows + "\n\tProduct inserted!\n");
-                connection.end();
+                runSearch();
             })
     })
 
+
+};
+
+const viewProducts = function() {
+    connection.query("SELECT * FROM products", function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        runSearch();
+    });
+};
+const viewLowInv = function() {
+    connection.query("SELECT * FROM products", function(err, res) {
+        if (err) throw err;
+        lowInventory = [];
+        for (let i = 0; i < res.length; i++) {
+            if (res[i].stock_quantity <= 5) {
+                lowInventory.push(res[i]);
+            }
+        }
+        console.table(lowInventory);
+        runSearch();
+    });
+};
+const addToInv = function() {
 
 };
 

@@ -10,7 +10,7 @@ In the javascript folder run 'npm init -y' and 'npm i' to install required packa
 then type 'node bamazonCustomer.js'
 Follow on screen instructions. The user is prompted to select an operation from a list.
 
-*list options:
+**list options**:
   * 'View Products for Sale'
   * 'View Low Inventory'
   * 'Add to Inventory'

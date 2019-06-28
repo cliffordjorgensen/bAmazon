@@ -1,6 +1,6 @@
 # bAmazon
 
-##Managers View (node app HW challenge 2)
+###Managers View (node app HW challenge 2)
 
 
 ### Run the App
